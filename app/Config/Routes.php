@@ -2,6 +2,7 @@
 
 namespace Config;
 
+
 // Create a new instance of our RouteCollection class.
 $routes = Services::routes();
 
@@ -36,18 +37,23 @@ $routes->post('/pengaduan/save', 'Pengaduan::save');
 $routes->delete('/pengaduan/(:num)', 'Pengaduan::delete/$1');
 $routes->post('/pengaduan/update', 'Pengaduan::update/$1');
 $routes->get('/pengaduan/edit/(:segment)', 'Pengaduan::edit/$1');
-$routes->get('/pengaduan/verifikasi/(:segment)', 'Pengaduan::verifikasi/$1');
 $routes->post('/pengaduan/update/(:segment)', 'Pengaduan::update/$1');
 
+// Admin
+// $routes->get('/admin/verifikasi/(:segment)', 'Admin::verifikasi/$1');
+$routes->get('admin/verifikasi/(:num)', 'Admin::verifikasi/$1');
+$routes->get('admin/verifikasi/(:num)/(:segment)', 'Admin::verifikasiStatus/$1/$2');
 $routes->get('/admin', 'Admin::index', ['filter' => 'role:admin']);
 $routes->get('/admin/index', 'Admin::index', ['filter' => 'role:admin']);
 $routes->get('/admin', 'Admin::userlist', ['filter' => 'role:admin']);
 $routes->get('/admin/userlist', 'Admin::userlist', ['filter' => 'role:admin']);
 $routes->get('/admin/report', 'Admin::report', ['filter' => 'role:admin']);
+$routes->get('/admin/export', 'Admin::export', ['filter' => 'role:admin']);
+$routes->get('/admin/pending', 'Admin::pending');
 
-// $routes->get('/admin/progress', 'Admin::progress');
+
 $routes->get('/user/index', 'User::index');
-// $routes->get('/admin/export', 'Admin::export');
+
 
 $routes->get('/admin/(:num)', 'Admin::detail/$1', ['filter' => 'role:admin']);
 

@@ -16,8 +16,8 @@ class Pengaduan extends Migration
                 'auto_increment' => true,
             ],
             'nik' => [
-                'type'       => 'INT',
-                'constraint' => '15',
+                'type'       => 'VARCHAR',
+                'constraint' => '20',
             ],
             'nama' => [
                 'type'       => 'VARCHAR',

@@ -1,6 +1,7 @@
 <?= $this->extend('templates/index'); ?>
 
 <?= $this->section('page-content'); ?>
+
 <div class="container">
     <div class="row">
         <div class="col-6">
@@ -44,15 +45,17 @@
                             <td><?= $p['nik']; ?></td>
                             <td><?= $p['nama']; ?></td>
                             <td><?= $p['alamat']; ?></td>
-                            <td>....</td>
+                            <td><?= $p['status_pengaduan']; ?></td>
                             <td>
+
                                 <?php if (in_groups('admin')) : ?>
-                                    <a href="/pengaduan/verifikasi/<?= $p['id']; ?>" class="btn btn-info">Detail</a>
+                                    <a href="admin/verifikasi/<?= $p['id']; ?>" class="btn btn-info">Detail</a>
                                 <?php endif; ?>
+
                                 <?php if (in_groups('user')) : ?>
                                     <a href="/pengaduan/<?= $p['id']; ?>" class="btn btn-info">Detail</a>
                                 <?php endif; ?>
-                                <form action="/p/<?= $p['id']; ?>" method="post" class="d-inline">
+                                <form action="/pengaduan/<?= $p['id']; ?>" method="post" class="d-inline">
                                     <?= csrf_field(); ?>
                                     <input type="hidden" name="_method" value="DELETE">
                                     <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah anda yakin ingin menghapus?');">Hapus</button>

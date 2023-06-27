@@ -4,7 +4,7 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                 <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
+                    <i class="fas fa-exclamation-triangle"></i>
                 </div>
                 <div class="sidebar-brand-text mx-3">Pengaduan<sup></sup></div>
             </a>
@@ -36,13 +36,34 @@
                 Pengaduan
             </div>
 
+            <!-- Nav Item - Pages Collapse Menu -->
+            <?php if (in_groups('admin')) : ?>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                        <i class="fas fa-fw fa-chart-area text-gray-300"></i>
+                        <span>Pengaduan</span>
+                    </a>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Pengaduan</h6>
+                            <a class="collapse-item" href="/pengaduan">Semua Pengaduan</a>
+                            <a class="collapse-item" href="/admin/pending">Menunggu Verifikasi</a>
+                            <a class="collapse-item" href="cards.html">Selesai</a>
+                        </div>
+                    </div>
+                </li>
+            <?php endif; ?>
 
             <!-- Nav Item - Tabel Pengaduan -->
-            <li class="nav-item">
-                <a class="nav-link" href="/pengaduan">
-                    <i class="fas fa-fw fa-chart-area text-gray-300"></i>
-                    <span>Pengaduan</span></a>
-            </li>
+            <?php if (in_groups('user')) : ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="/pengaduan">
+                        <i class="fas fa-fw fa-chart-area text-gray-300"></i>
+                        <span>Pengaduan</span>
+                    </a>
+                </li>
+            <?php endif; ?>
+
 
             <?php if (in_groups('admin')) : ?>
                 <!-- Nav Item - Tabel Pengaduan -->

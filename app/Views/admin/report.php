@@ -2,7 +2,7 @@
 
 <?= $this->section('page-content'); ?>
 
-<div class="container-fluid">
+<div class="container">
 
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800">Laporan</h1>
@@ -11,15 +11,15 @@
         <li class="fas fa-file-download"></li>Eksport Excel
     </a>
 
-    <table class="table table-bordered">
-        <thead class="table-warning">
+    <table class="table custom-table table-bordered">
+        <thead class="table-success">
             <tr>
                 <th scope="col">No.</th>
                 <th scope="col">NIK</th>
                 <th scope="col">Nama</th>
                 <th scope="col">Jenis Kasus</th>
                 <th scope="col">Alamat</th>
-                <th scope="col">Dibuat pada</th>
+                <th scope="col">Dilaporkan</th>
                 <th scope="col">Status Laporan</th>
             </tr>
         </thead>
@@ -32,8 +32,8 @@
                     <td><?= $p['nama']; ?></td>
                     <td><?= $p['jns_kasus']; ?></td>
                     <td><?= $p['alamat']; ?></td>
-                    <td><?= $p['created_at']; ?></td>
-                    <td>....</td>
+                    <td> <?= date('d M Y', strtotime($p['created_at'])); ?></td>
+                    <td><?= $p['status_pengaduan']; ?></td>
                 </tr>
             <?php endforeach; ?>
         </tbody>

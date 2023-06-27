@@ -38,7 +38,7 @@
                 </div>
                 <div class="col-md-6">
                     <label for="tgl_lahir" class="form-label">Tanggal Lahir</label>
-                    <input type="text" class="form-control mb-3" id="tgl_lahir" name="tgl_lahir" value="<?= (old('tgl_lahir')) ? old('tgl_lahir') : $pengaduan['tgl_lahir'] ?>">
+                    <input type="date" class="form-control mb-3" id="tgl_lahir" name="tgl_lahir" value="<?= (old('tgl_lahir')) ? old('tgl_lahir') : $pengaduan['tgl_lahir'] ?>">
                 </div>
                 <div class="col-md-6">
                     <label for="pendidikan" class="form-label">Pendidikan</label>
@@ -63,12 +63,9 @@
 
                 <div class="col-md-6">
                     <label for="deskripsi" class="form-label">Keterangan</label>
-                    <input type="text" class="form-control" id="deskripsi" name="deskripsi" value="<?= (old('deskripsi')) ? old('deskripsi') : $pengaduan['deskripsi'] ?>">
+                    <textarea type="text" class="form-control" id="deskripsi" name="deskripsi"><?= (old('deskripsi')) ? old('deskripsi') : $pengaduan['deskripsi'] ?></textarea>
                 </div>
-                <div class="col-md-6">
-                    <label for="lokasi" class="form-label">Lokasi</label>
-                    <input type="text" class="form-control mb-3" id="foto" name="lokasi">
-                </div>
+
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label for="foto" class="custom-form-label">Foto KTP/KK</label>
@@ -77,11 +74,36 @@
                         </div>
                         <input class="form-control <?= ($validation->hasError('foto')) ? 'is-invalid' : ''; ?>" id="foto" name="foto" type="file" onchange="previewImg()">
                     </div>
+                </div>
 
-                </div>
-                <div class=" col-12">
-                    <button type="submit" class="btn btn-primary mt-3 mb-3">Kirim</button>
-                </div>
+                <div class="col-md-6">
+                    <br>
+                    <h6>Lokasi</h6>
+                    <div id="map" style="width: 530px; height: 350px;"></div>
+                    <input type="hidden" name="latitude" id="latitude" value="<?= $pengaduan['latitude'] ?>">
+                    <input type="hidden" name="longitude" id="longitude" value="<?= $pengaduan['longitude'] ?>">
+
+
+                    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.js"></script>
+                    <script>
+                        var map = L.map('map').setView([<?= $pengaduan['latitude'] ?>, <?= $pengaduan['longitude'] ?>], 13);
+
+                        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+                        }).addTo(map);
+
+                        var marker = L.marker([<?= $pengaduan['latitude'] ?>, <?= $pengaduan['longitude'] ?>], {
+                            draggable: false
+                        }).addTo(map);
+
+                        marker.bindPopup("Lokasi saat ini").openPopup();
+                    </script>
+
+
+
+                    <div class=" col-12">
+                        <button type="submit" class="btn btn-primary mt-3 mb-3">Kirim</button>
+                    </div>
             </form>
         </div>
     </div>

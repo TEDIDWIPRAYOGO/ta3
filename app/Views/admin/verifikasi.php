@@ -56,17 +56,50 @@
                                                         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
                                                     }).addTo(map);
 
-                                                    var marker = L.marker([<?= $pengaduan['latitude'] ?>, <?= $pengaduan['longitude'] ?>]).addTo(map);
-                                                    marker.bindPopup("Lokasi Saya").openPopup();
+                                                    var marker = L.marker([<?= $pengaduan['latitude'] ?>, <?= $pengaduan['longitude'] ?>], {
+                                                        draggable: false
+                                                    }).addTo(map);
+
+                                                    marker.bindPopup("Lokasi Pelapor").openPopup();
                                                 </script>
                                             </div>
+
+                                            <div class="d-flex justify-content-center">
+                                                <a class="btn btn-warning mr-3" href="<?= base_url('admin/verifikasi/' . $pengaduan['id'] . '/onprocess'); ?>">Onprocess</a>
+                                                <a class="btn btn-success mr-3" href="<?= base_url('admin/verifikasi/' . $pengaduan['id'] . '/diterima'); ?>">Diterima</a>
+                                                <a class="btn btn-danger mr-4" href="<?= base_url('admin/verifikasi/' . $pengaduan['id'] . '/ditolak'); ?>">Ditolak</a>
+                                            </div>
+
+                                            <br>
+                                            <!-- Tombol untuk membuka modal -->
+                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+                                                Buka Modal
+                                            </button>
+
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-scrollable">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header text-center">
+                                                            <h5 class="modal-title w-100" id="exampleModalLabel">Judul Modal</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+
+
+
+
+                                                        </div>
+                                                        <div class="modal-footer">
+
+                                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Kembali</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                         </div>
                                     </div>
-                                    <br>
-                                    <a href="/pengaduan" class="btn btn-primary mb-3">&laquo Kembali</a>
-                                    <?php if (in_groups('user')) : ?>
-                                        <a href="/pengaduan/edit/<?= $pengaduan['id']; ?>" class="btn btn-warning mb-3"> Edit &raquo</a>
-                                    <?php endif; ?>
                                 </div>
 
                                 <div class="col-md-5">
@@ -74,7 +107,7 @@
                                         <img src="/img/<?= $pengaduan['foto']; ?>" class="card-img-top" alt="Foto">
                                         <br>
                                         <div class="card-body">
-                                            <h5 class="card-title text-left">Data Diri</h5>
+                                            <h5 class="card-title text-left">Detail Data Diri</h5>
                                             <hr class="my-4">
                                             <div class="row">
                                                 <div class="col-4">
@@ -159,13 +192,19 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
+                    <a href="/pengaduan" class="btn btn-primary mb-3">&laquo Kembali</a>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <?= $this->endSection(); ?>
+
+
+
+
+
+<?= $this->endSection(); ?>

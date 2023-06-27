@@ -36,7 +36,7 @@
                 </div>
                 <div class="col-md-6">
                     <label for="tgl_lahir" class="form-label">Tanggal Lahir</label>
-                    <input type="text" class="form-control mb-3" id="tgl_lahir" name="tgl_lahir" value="<?= old('tgl_lahir'); ?>">
+                    <input type="date" class="form-control mb-3" id="tgl_lahir" name="tgl_lahir" value="<?= old('tgl_lahir'); ?>">
                 </div>
                 <div class="col-md-6">
                     <label for="pendidikan" class="form-label">Pendidikan</label>
@@ -44,7 +44,11 @@
                 </div>
                 <div class="col-md-6">
                     <label for="jns_kelamin" class="form-label">Jenis Kelamin</label>
-                    <input type="text" class="form-control mb-3" id="jns_kelamin" name="jns_kelamin" value="<?= old('jns_kelamin'); ?>">
+                    <select class="form-select mb-3" id="jns_kelamin" name="jns_kelamin" value="<?= old('jns_kelamin'); ?>">
+                        <option value=""></option>
+                        <option value="Laki-laki">Laki-laki</option>
+                        <option value="Perempuan">Perempuan</option>
+                    </select>
                 </div>
                 <div class="col-md-6">
                     <label for="telepon" class="form-label">No. Telepon</label>
@@ -61,13 +65,66 @@
 
                 <div class="col-md-6">
                     <label for="deskripsi" class="form-label">Keterangan</label>
-                    <input type="text" class="form-control" id="deskripsi" name="deskripsi" value="<?= old('deskripsi'); ?>">
+                    <textarea type="text" class="form-control" id="deskripsi" name="deskripsi" value="<?= old('deskripsi'); ?>"></textarea>
                 </div>
+
+
                 <div class="col-md-6">
-                    <label for="lokasi" class="form-label">Lokasi</label>
-                    <input type="text" class="form-control mb-3" id="foto" name="lokasi">
+                    <div class="mb-3">
+                        <label for="foto" class="form-label">Foto KTP/KK</label>
+                        <input type="file" class="form-control <?= ($validation->hasError('foto')) ? 'is-invalid' : ''; ?>" id="foto" name="foto">
+                        <div class="invalid-feedback">
+                            <?= $validation->getError('foto'); ?>
+                        </div>
+                    </div>
                 </div>
-                <!-- <div class="col-md-6">
+
+
+
+                <!-- MAPS -->
+                <div class="col-md-6">
+                    <br>
+                    <h6>Lokasi</h6>
+                    <div id="map" style="width: 530px; height: 350px;"></div>
+                    <input type="hidden" name="latitude" id="latitude">
+                    <input type="hidden" name="longitude" id="longitude">
+
+                    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.js"></script>
+                    <script>
+                        var map = L.map('map').setView([1.5060640410332051, 102.24833645407905], 10); // Set default view to Jakarta, Indonesia
+
+                        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+                        }).addTo(map);
+
+                        map.locate({
+                            setView: true,
+                            maxZoom: 16
+                        });
+
+                        function onLocationFound(e) {
+                            var marker = L.marker(e.latlng, {
+                                draggable: false
+                            }).addTo(map);
+                            document.getElementById('latitude').value = e.latlng.lat;
+                            document.getElementById('longitude').value = e.latlng.lng;
+
+                            marker.bindPopup("Lokasi saat ini").openPopup();
+                        }
+
+                        function onLocationError(e) {
+                            alert(e.message);
+                        }
+
+                        map.on('locationfound', onLocationFound);
+                        map.on('locationerror', onLocationError);
+                    </script>
+
+
+                </div>
+        </div>
+
+        <!-- <div class="col-md-6">
                     <label for="lokasi" class="form-label">Foto KTP/KK</label>
                     <div class="col-sm-2">
                         <img src="/img/g2.jpg" class="img-thumbnail img-preview">
@@ -81,22 +138,12 @@
                     </div>
                 </div> -->
 
-                <div class="col-md-6">
-                    <div class="mb-3">
-                        <label for="foto" class="form-label">Foto KTP/KK</label>
-                        <input type="file" class="form-control <?= ($validation->hasError('foto')) ? 'is-invalid' : ''; ?>" id="foto" name="foto">
-                        <div class="invalid-feedback">
-                            <?= $validation->getError('foto'); ?>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12">
-                    <button type="submit" class="btn btn-primary mt-5 mb-4">Kirim</button>
-                </div>
-            </form>
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary mt-5 mb-4">Kirim</button>
         </div>
+        </form>
     </div>
 </div>
+
 
 <?= $this->endSection(); ?>

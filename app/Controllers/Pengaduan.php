@@ -5,6 +5,7 @@ namespace App\Controllers;
 
 use App\Models\PengaduanModel;
 
+
 class Pengaduan extends BaseController
 {
     protected $pengaduanModel;
@@ -12,8 +13,12 @@ class Pengaduan extends BaseController
     {
         $this->pengaduanModel = new PengaduanModel();
     }
+
+
     public function index()
     {
+
+
 
         $currentPage = $this->request->getVar('page_pengaduan') ? $this->request->getVar('page_pengaduan') : 1;
 
@@ -37,9 +42,9 @@ class Pengaduan extends BaseController
         // $pengaduanModel = new \App\Models\PengaduanModel();
 
 
-
         return view('pengaduan/index', $data);
     }
+
 
 
     public function detail($slug)
@@ -84,6 +89,8 @@ class Pengaduan extends BaseController
             'pekerjaan' => 'required[pengaduan.pekerjaan]',
             'pendidikan' => 'required[pengaduan.pendidikan]',
             'telepon' => 'required[pengaduan.telepon]',
+            // 'latitude' => '[pengaduan.latitude]',
+            // 'longitude' => '[pengaduan.longitude]',
 
             'foto' => [
                 'rules' => 'uploaded[foto]|max_size[foto,1024]|is_image[foto]|mime_in[foto,image/jpg,image/jpeg,image/png]',
@@ -123,6 +130,8 @@ class Pengaduan extends BaseController
             'pekerjaan' => $this->request->getVar('pekerjaan'),
             'pendidikan' => $this->request->getVar('pendidikan'),
             'telepon' => $this->request->getVar('telepon'),
+            'latitude' => $this->request->getVar('latitude'),
+            'longitude' => $this->request->getVar('longitude'),
             'foto' => $namaFoto
         ]);
 
@@ -131,9 +140,10 @@ class Pengaduan extends BaseController
         return redirect()->to('/pengaduan');
     }
 
+
+
     public function delete($id)
     {
-
         // cari gambar berdasarkan id
         $pengaduan = $this->pengaduanModel->find($id);
 
@@ -144,6 +154,8 @@ class Pengaduan extends BaseController
         session()->setFlashdata('pesan', 'Data berhasil dihapus');
         return redirect()->to('/pengaduan');
     }
+
+
 
     public function edit($slug)
     {
@@ -156,10 +168,10 @@ class Pengaduan extends BaseController
         return view('pengaduan/edit', $data);
     }
 
+
+
     public function update($id)
     {
-
-
         // validasi input
         if (!$this->validate([
             'nik' => 'required[pengaduan.nik]',
@@ -219,6 +231,8 @@ class Pengaduan extends BaseController
             'pekerjaan' => $this->request->getVar('pekerjaan'),
             'pendidikan' => $this->request->getVar('pendidikan'),
             'telepon' => $this->request->getVar('telepon'),
+            'latitude' => $this->request->getVar('latitude'),
+            'longitude' => $this->request->getVar('longitude'),
             'foto' => $namaFoto
         ]);
 
