@@ -2,11 +2,13 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-exclamation-triangle"></i>
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/pengaduan">
+                <div class="sidebar-brand-icon rotate-n-0">
+                    <!-- <img src="/img/logo2.png" class="d-block w-100" style="width: 50px; height: 55px;" alt="..."> -->
                 </div>
-                <div class="sidebar-brand-text mx-3">Pengaduan<sup></sup></div>
+                <div class="sidebar-brand-text mx-3">
+
+                </div>
             </a>
 
 
@@ -37,7 +39,7 @@
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <?php if (in_groups('admin')) : ?>
+            <?php if (in_groups('admin') || in_groups('upt_heads')) : ?>
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                         <i class="fas fa-fw fa-chart-area text-gray-300"></i>
@@ -47,14 +49,14 @@
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Pengaduan</h6>
                             <a class="collapse-item" href="/pengaduan">Semua Pengaduan</a>
-                            <a class="collapse-item" href="/admin/pending">Menunggu Verifikasi</a>
-                            <a class="collapse-item" href="cards.html">Selesai</a>
+                            <a class="collapse-item" href="/pengaduan/pending">Menunggu Verifikasi</a>
+                            <a class="collapse-item" href="/pengaduan/finish">Selesai</a>
                         </div>
                     </div>
                 </li>
             <?php endif; ?>
 
-            <!-- Nav Item - Tabel Pengaduan -->
+            <!-- Nav Item - Tabel Pengaduan USER-->
             <?php if (in_groups('user')) : ?>
                 <li class="nav-item">
                     <a class="nav-link" href="/pengaduan">
@@ -70,11 +72,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="<?= base_url('admin/userlist'); ?>">
                         <i class="fas fa-users text-gray-300"></i>
-                        <span>User List</span></a>
+                        <span>Pengguna</span></a>
                 </li>
             <?php endif; ?>
 
-            <?php if (in_groups('admin')) : ?>
+            <?php if (in_groups('admin') || in_groups('upt_heads')) : ?>
                 <!-- Nav Item - Report -->
                 <li class="nav-item">
                     <a class="nav-link" href="<?= base_url('admin/report'); ?>">

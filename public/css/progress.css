@@ -1,5 +1,6 @@
 .container {
-  text-align: center;
+  width: 100%;
+  margin-bottom: 20px;
 }
 
 .progress-container {
@@ -8,6 +9,9 @@
   position: relative;
   justify-content: space-between;
 }
+
+
+
 
 .progress-bar-back,
 .progress-bar-front {

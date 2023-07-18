@@ -7,7 +7,7 @@ class Pages extends BaseController
     public function index()
     {
         $data = [
-            'title' => 'Home | Halaman Utama'
+            'title' => 'Home'
         ];
         return view('pages/home', $data);
         // return view('auth/login', $data);
@@ -16,7 +16,7 @@ class Pages extends BaseController
     public function login()
     {
         $data = [
-            'title' => 'Home | Halaman Utama',
+            'title' => 'Login',
         ];
         // return view('pages/home', $data);
         return view('auth/login', $data);
@@ -25,7 +25,7 @@ class Pages extends BaseController
     public function register()
     {
         $data = [
-            'title' => 'Home | Halaman Utama'
+            'title' => 'Register'
         ];
         // return view('pages/home', $data);
         return view('auth/register', $data);

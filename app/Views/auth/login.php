@@ -4,6 +4,7 @@
 
 <div class="container">
 
+    <title>Login</title>
     <!-- Outer Row -->
     <div class="row justify-content-center">
 

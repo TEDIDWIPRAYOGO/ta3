@@ -6,8 +6,54 @@
     vertical-align: middle;
 }
 
-.card-img {
+/* Shadow Table */
+    .table {
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
     
-}
+/* Button aksi */
+    .btn {
+        padding: 5px 10px;
+        font-size: 12px;
+    }
 
 
+    #special-card {
+        animation: none;
+    }
+
+    @keyframes zoom-in {
+        0% {
+            transform: scale(1);
+        }
+
+        50% {
+            transform: scale(1.1);
+        }
+
+        100% {
+            transform: scale(1);
+        }
+    }
+
+    .card {
+        animation: zoom-in 2s infinite;
+    }
+
+    .card:hover {
+        animation: none;
+    }
+
+    .card {
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
+      }
+
+        
+
+/* .container-fluid {
+    height: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 340px;
+  } */

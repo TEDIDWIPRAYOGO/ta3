@@ -105,7 +105,7 @@
                                                     <p class="font-weight-bold text-left bg-light">Tanggal Lahir</p>
                                                 </div>
                                                 <div class="col-8">
-                                                    <p class="text-left bg-light">: <?= $pengaduan['tgl_lahir']; ?></p>
+                                                    <p class="text-left bg-light">: <?= date('d M Y', strtotime($pengaduan['tgl_lahir'])); ?></p>
                                                 </div>
                                             </div>
                                             <div class="row">

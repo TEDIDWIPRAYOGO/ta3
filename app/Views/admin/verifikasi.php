@@ -8,6 +8,7 @@
             <div class="card text-center col-md-12">
                 <div class="card-header">
                     <h5 class="card-title">Detail Pengaduan</h5>
+                    <link rel="stylesheet" href="<?= base_url(); ?>/css/progress.css" />
                 </div>
                 <div class="card-header">
                     <div class="row">
@@ -70,30 +71,64 @@
                                                 <a class="btn btn-danger mr-4" href="<?= base_url('admin/verifikasi/' . $pengaduan['id'] . '/ditolak'); ?>">Ditolak</a>
                                             </div>
 
+
                                             <br>
                                             <!-- Tombol untuk membuka modal -->
-                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
-                                                Buka Modal
-                                            </button>
+                                            <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+                                                Verifikasi
+                                            </button> -->
 
                                             <!-- Modal -->
                                             <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-scrollable">
                                                     <div class="modal-content">
                                                         <div class="modal-header text-center">
-                                                            <h5 class="modal-title w-100" id="exampleModalLabel">Judul Modal</h5>
+                                                            <h5 class="modal-title w-100" id="exampleModalLabel">Progress</h5>
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
+
+                                                        <br>
                                                         <div class="modal-body">
+                                                            <div class="container">
+                                                                <div class="progress-container">
+                                                                    <hr class="progress-bar-back" />
+                                                                    <hr class="progress-bar-front" />
+                                                                    <div class="step checked">
+                                                                        <i class="fas fa-check"></i>
+                                                                        <small>Menunggu</small>
+                                                                    </div>
+                                                                    <div class="step">
+                                                                        <i class="fas fa-times"></i>
+                                                                    </div>
+                                                                    <div class="step">
+                                                                        <i class="fas fa-times"></i>
+                                                                    </div>
+                                                                    <div class="step">
+                                                                        <i class="fas fa-times"></i>
+                                                                    </div>
+                                                                    <div class="step">
+                                                                        <i class="fas fa-times"></i>
+                                                                    </div>
+                                                                </div>
+                                                                <button class="btn" id="prev" disabled>
+                                                                    <i class="fas fa-arrow-left"></i>
+                                                                </button>
+                                                                <button class="btn" id="next"><i class="fas fa-arrow-right"></i></button>
+                                                            </div>
+                                                            <br>
 
 
 
+                                                            <script src="<?= base_url(); ?>/js/index.js"></script>
 
                                                         </div>
-                                                        <div class="modal-footer">
+
+
+                                                        <div class="footer">
 
                                                             <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Kembali</button>
                                                         </div>
+                                                        <br>
                                                     </div>
                                                 </div>
                                             </div>
@@ -107,7 +142,7 @@
                                         <img src="/img/<?= $pengaduan['foto']; ?>" class="card-img-top" alt="Foto">
                                         <br>
                                         <div class="card-body">
-                                            <h5 class="card-title text-left">Detail Data Diri</h5>
+                                            <h5 class="card-title text-left">Data Diri</h5>
                                             <hr class="my-4">
                                             <div class="row">
                                                 <div class="col-4">
@@ -138,7 +173,7 @@
                                                     <p class="font-weight-bold text-left bg-light">Tanggal Lahir</p>
                                                 </div>
                                                 <div class="col-8">
-                                                    <p class="text-left bg-light">: <?= $pengaduan['tgl_lahir']; ?></p>
+                                                    <p class="text-left bg-light">: <?= date('d M Y', strtotime($pengaduan['tgl_lahir'])); ?></p>
                                                 </div>
                                             </div>
                                             <div class="row">

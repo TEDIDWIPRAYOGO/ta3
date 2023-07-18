@@ -3,13 +3,13 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
-
+use Myth\Auth\Models\UserModel;
 
 class PengaduanModel extends Model
 {
     protected $table = 'pengaduan';
     protected $useTimestamps = true;
-    protected $allowedFields = ['nik', 'nama', 'slug', 'tmpt_lahir', 'tgl_lahir', 'jns_kelamin', 'jns_kasus', 'status_pengaduan', 'deskripsi', 'alamat', 'agama', 'status_perkawinan', 'pekerjaan', 'pendidikan', 'telepon', 'foto', 'latitude', 'longitude'];
+    protected $allowedFields = ['nik', 'nama', 'slug', 'tmpt_lahir', 'tgl_lahir', 'jns_kelamin', 'jns_kasus', 'status_pengaduan', 'deskripsi', 'alamat', 'agama', 'status_perkawinan', 'pekerjaan', 'pendidikan', 'telepon', 'foto', 'latitude', 'longitude', 'user_id'];
     // EDIT
     protected $primaryKey = 'id';
     // ------
@@ -23,16 +23,11 @@ class PengaduanModel extends Model
     }
 
 
-
-
     public function search($keyword)
     {
-        // $builder = $this->table('pengaduan');
-        // $builder->like('nama', '$keyword');
-        // return $builder;
-
-        return $this->table('pengaduan')->like('nama', $keyword);
+        return $this->table('pengaduan')->like('nama', $keyword)->orLike('jns_kasus', $keyword);
     }
+
 
 
     // Fungsi untuk memperbarui status pengaduan
@@ -42,5 +37,13 @@ class PengaduanModel extends Model
             'status_pengaduan' => $status
         ];
         $this->update($id, $data);
+    }
+
+
+
+    // Fungsi untuk mendapatkan data pengaduan berdasarkan ID pengguna
+    public function getPengaduanByUserId($userId)
+    {
+        return $this->where('user_id', $userId)->findAll();
     }
 }

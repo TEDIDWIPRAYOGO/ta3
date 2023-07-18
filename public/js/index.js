@@ -24,26 +24,29 @@ prevEl.addEventListener("click", () => {
 });
 
 function updateStepProgress() {
+  const steps = [
+    "Menunggu",
+    "Review Data",
+    "Validasi Data",
+    "Survey TKP",
+    "Selesai"
+  ];
+
   stepsEl.forEach((stepEl, idx) => {
     if (idx < currentChecked) {
       stepEl.classList.add("checked");
       stepEl.innerHTML = `
-      <i class="fas fa-check"></i>
-      <small>${
-        idx === 0
-          ? "Start"
-          : idx === stepsEl.length - 1
-          ? "Final"
-          : "Step " + idx
-      }</small>
+        <i class="fas fa-check"></i>
+        <small>${steps[idx]}</small>
       `;
     } else {
       stepEl.classList.remove("checked");
       stepEl.innerHTML = `
-      <i class="fas fa-times"></i>
+        <i class="fas fa-times"></i>
       `;
     }
   });
+
 
   const checkedNumber = document.querySelectorAll(".checked");
 

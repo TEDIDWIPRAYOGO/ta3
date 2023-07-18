@@ -5,7 +5,7 @@
 <div class="container">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">Laporan</h1>
+    <!-- <h1 class="h3 mb-4 text-gray-800">Laporan</h1> -->
 
     <a href="<?= base_url('admin/export'); ?>" class="btn btn-success mb-3">
         <li class="fas fa-file-download"></li>Eksport Excel
@@ -15,7 +15,6 @@
         <thead class="table-success">
             <tr>
                 <th scope="col">No.</th>
-                <th scope="col">NIK</th>
                 <th scope="col">Nama</th>
                 <th scope="col">Jenis Kasus</th>
                 <th scope="col">Alamat</th>
@@ -28,7 +27,6 @@
             <?php foreach ($pengaduan as $p) : ?>
                 <tr>
                     <th scope="row"><?= $i++; ?></th>
-                    <td><?= $p['nik']; ?></td>
                     <td><?= $p['nama']; ?></td>
                     <td><?= $p['jns_kasus']; ?></td>
                     <td><?= $p['alamat']; ?></td>

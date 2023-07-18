@@ -26,13 +26,33 @@ class Admin extends BaseController
         $this->pengaduanModel = new PengaduanModel();
     }
 
+    // public function index()
+    // {
+    //     $data = [
+    //         'title' => 'Dashboard'
+    //     ];
+    //     return view('admin/index', $data);
+    // }
+
     public function index()
     {
+        // Menghitung jumlah pengaduan
+        $totalPengaduan = $this->db->table('pengaduan')->countAllResults();
+
+        // Menghitung jumlah user
+        $totalUser = $this->db->table('users')->countAllResults();
+
+        // Mengirim data ke view
         $data = [
+            'totalPengaduan' => $totalPengaduan,
+            'totalUser' => $totalUser,
             'title' => 'Dashboard'
         ];
+
+        // Menampilkan view dashboard_admin.php
         return view('admin/index', $data);
     }
+
 
     public function userlist()
     {
@@ -86,6 +106,7 @@ class Admin extends BaseController
     }
 
 
+
     public function export()
     {
         $pengaduanModel = new PengaduanModel();
@@ -98,23 +119,21 @@ class Admin extends BaseController
 
         // Set header kolom
         $sheet->setCellValue('A1', 'NO');
-        $sheet->setCellValue('B1', 'NIK');
-        $sheet->setCellValue('C1', 'Nama');
-        $sheet->setCellValue('D1', 'Jenis Kasus');
-        $sheet->setCellValue('E1', 'Alamat');
-        $sheet->setCellValue('F1', 'Tanggal Lapor');
-        $sheet->setCellValue('G1', 'Status Laporan');
+        $sheet->setCellValue('B1', 'Nama');
+        $sheet->setCellValue('C1', 'Jenis Kasus');
+        $sheet->setCellValue('D1', 'Alamat');
+        $sheet->setCellValue('E1', 'Tanggal Lapor');
+        $sheet->setCellValue('F1', 'Status Laporan');
 
         // Set data pengaduan pada baris selanjutnya
         $row = 2;
         foreach ($pengaduan as $pengaduan) {
             $sheet->setCellValue('A' . $row, ($row - 1));
-            $sheet->setCellValue('B' . $row, $pengaduan['nik']);
-            $sheet->setCellValue('C' . $row, $pengaduan['nama']);
-            $sheet->setCellValue('D' . $row, $pengaduan['jns_kasus']);
-            $sheet->setCellValue('E' . $row, $pengaduan['alamat']);
-            $sheet->setCellValue('F' . $row, date('d M Y', strtotime($pengaduan['created_at'])));
-            $sheet->setCellValue('G' . $row, $pengaduan['status_pengaduan']);
+            $sheet->setCellValue('B' . $row, $pengaduan['nama']);
+            $sheet->setCellValue('C' . $row, $pengaduan['jns_kasus']);
+            $sheet->setCellValue('D' . $row, $pengaduan['alamat']);
+            $sheet->setCellValue('E' . $row, date('d M Y', strtotime($pengaduan['created_at'])));
+            $sheet->setCellValue('F' . $row, $pengaduan['status_pengaduan']);
 
             $row++;
         }
@@ -140,7 +159,7 @@ class Admin extends BaseController
                 ],
             ],
         ];
-        $sheet->getStyle('A1:G1')->applyFromArray($titleStyle);
+        $sheet->getStyle('A1:F1')->applyFromArray($titleStyle);
 
         // Gaya kolom A
         $columnAStyle = [
@@ -165,7 +184,7 @@ class Admin extends BaseController
         $sheet->getColumnDimension('D')->setAutoSize(true);
         $sheet->getColumnDimension('E')->setAutoSize(true);
         $sheet->getColumnDimension('F')->setAutoSize(true);
-        $sheet->getColumnDimension('G')->setAutoSize(true);
+
 
         // Simpan ke file atau output ke browser
         $writer = new Xlsx($spreadsheet);

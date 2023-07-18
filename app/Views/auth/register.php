@@ -2,6 +2,8 @@
 
 <?= $this->section('content'); ?>
 
+
+<title>Register</title>
 <div class="container">
     <div class="row justify-content-center">
 

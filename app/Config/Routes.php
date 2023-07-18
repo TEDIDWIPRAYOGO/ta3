@@ -38,18 +38,27 @@ $routes->delete('/pengaduan/(:num)', 'Pengaduan::delete/$1');
 $routes->post('/pengaduan/update', 'Pengaduan::update/$1');
 $routes->get('/pengaduan/edit/(:segment)', 'Pengaduan::edit/$1');
 $routes->post('/pengaduan/update/(:segment)', 'Pengaduan::update/$1');
+$routes->get('/pengaduan/pending', 'Pengaduan::pending', ['filter' => 'role:admin']);
+$routes->get('/pengaduan/finish', 'Pengaduan::finish', ['filter' => 'role:admin']);
+
+// Search
+$routes->post('pengaduan', 'Pengaduan::index');
+
+
 
 // Admin
 // $routes->get('/admin/verifikasi/(:segment)', 'Admin::verifikasi/$1');
-$routes->get('admin/verifikasi/(:num)', 'Admin::verifikasi/$1');
-$routes->get('admin/verifikasi/(:num)/(:segment)', 'Admin::verifikasiStatus/$1/$2');
+$routes->get('admin/verifikasi/(:num)', 'Admin::verifikasi/$1', ['filter' => 'role:admin']);
+$routes->get('admin/verifikasi/(:num)/(:segment)', 'Admin::verifikasiStatus/$1/$2', ['filter' => 'role:admin']);
 $routes->get('/admin', 'Admin::index', ['filter' => 'role:admin']);
 $routes->get('/admin/index', 'Admin::index', ['filter' => 'role:admin']);
 $routes->get('/admin', 'Admin::userlist', ['filter' => 'role:admin']);
 $routes->get('/admin/userlist', 'Admin::userlist', ['filter' => 'role:admin']);
-$routes->get('/admin/report', 'Admin::report', ['filter' => 'role:admin']);
-$routes->get('/admin/export', 'Admin::export', ['filter' => 'role:admin']);
-$routes->get('/admin/pending', 'Admin::pending');
+$routes->get('/admin/report', 'Admin::report', ['filter' => 'role:admin,upt_heads']);
+$routes->get('/admin/export', 'Admin::export', ['filter' => 'role:admin,upt_heads']);
+// $routes->get('/admin/report', 'Admin::report');
+// $routes->get('/admin/export', 'Admin::export');
+// $routes->get('/admin/pending', 'Admin::pending');
 
 
 $routes->get('/user/index', 'User::index');
